@@ -7,20 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RequestCadena;
-import com.example.demo.serivce.SelectionService;
-import com.example.demo.serivce.SortService;
+import com.example.demo.serivce.InsertionService;
 
 //Sabe que esta clase sera controlador con esta etiqueta para distribuir la lógica
 @RestController
 //Configuramos la direccion de la api con esta etiqueta
 @RequestMapping("/api/sort")
-public class SortController {
+public class InsertionController {
     @Autowired
-    SortService service;
+    InsertionService insertion;
 
-    @PostMapping("/burbuja")//Endpoint
-    public int[] bubbleSort(@RequestBody RequestCadena request){
-
+    @PostMapping("/insertion")
+    public int[] insertionSort(@RequestBody RequestCadena request) {
+        
         //Obtenemos el arreglo de numeros
         String[] partes = request.getCadena().split(",");
         //Lo convertimos a un arreglo de enteros
@@ -33,7 +32,7 @@ public class SortController {
                 numeros[i]=0;
             }
         }
-
-        return service.sort(numeros);
+        
+        return insertion.sort(numeros);
     }
 }

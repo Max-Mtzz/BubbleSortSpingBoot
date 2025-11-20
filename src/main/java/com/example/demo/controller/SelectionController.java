@@ -8,19 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RequestCadena;
 import com.example.demo.serivce.SelectionService;
-import com.example.demo.serivce.SortService;
 
 //Sabe que esta clase sera controlador con esta etiqueta para distribuir la lógica
 @RestController
 //Configuramos la direccion de la api con esta etiqueta
 @RequestMapping("/api/sort")
-public class SortController {
+public class SelectionController {
     @Autowired
-    SortService service;
+    SelectionService selection;
 
-    @PostMapping("/burbuja")//Endpoint
-    public int[] bubbleSort(@RequestBody RequestCadena request){
-
+    @PostMapping("/selection")
+    public int[] selectionSort(@RequestBody RequestCadena request) {
+        
         //Obtenemos el arreglo de numeros
         String[] partes = request.getCadena().split(",");
         //Lo convertimos a un arreglo de enteros
@@ -33,7 +32,7 @@ public class SortController {
                 numeros[i]=0;
             }
         }
-
-        return service.sort(numeros);
+        
+        return selection.sort(numeros);
     }
 }
