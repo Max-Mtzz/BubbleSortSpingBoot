@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RequestCadena;
+import com.example.demo.serivce.InsertionService;
+import com.example.demo.serivce.SelectionService;
 import com.example.demo.serivce.SortService;
 
 //Sabe que esta clase sera controlador con esta etiqueta para distribuir la lógica
@@ -16,6 +18,8 @@ import com.example.demo.serivce.SortService;
 public class SortController {
     @Autowired
     SortService service;
+    InsertionService insertion;
+    SelectionService selection;
 
     @PostMapping("/burbuja")//Endpoint
     public int[] bubbleSort(@RequestBody RequestCadena request){
@@ -34,5 +38,43 @@ public class SortController {
         }
 
         return service.sort(numeros);
+    }
+
+    @PostMapping("/selection")
+    public int[] selectionSort(@RequestBody RequestCadena request) {
+        
+        //Obtenemos el arreglo de numeros
+        String[] partes = request.getCadena().split(",");
+        //Lo convertimos a un arreglo de enteros
+        int[] numeros = new int[partes.length];
+        //Recorremos el arreglo de la cadena de numeros y le asignamos los valores al arreglo de numeros enteros
+        for (int i = 0; i < partes.length; i++) {
+            try{
+                numeros[i]=Integer.parseInt(partes[i]);
+            }catch(Exception e){
+                numeros[i]=0;
+            }
+        }
+        
+        return selection.sort(numeros);
+    }
+    
+    @PostMapping("/insertion")
+    public int[] insertionSort(@RequestBody RequestCadena request) {
+        
+        //Obtenemos el arreglo de numeros
+        String[] partes = request.getCadena().split(",");
+        //Lo convertimos a un arreglo de enteros
+        int[] numeros = new int[partes.length];
+        //Recorremos el arreglo de la cadena de numeros y le asignamos los valores al arreglo de numeros enteros
+        for (int i = 0; i < partes.length; i++) {
+            try{
+                numeros[i]=Integer.parseInt(partes[i]);
+            }catch(Exception e){
+                numeros[i]=0;
+            }
+        }
+        
+        return insertion.sort(numeros);
     }
 }
