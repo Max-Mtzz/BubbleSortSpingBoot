@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.RequestCadena;
-import com.example.demo.serivce.SelectionService;
 import com.example.demo.serivce.SortService;
 
 //Sabe que esta clase sera controlador con esta etiqueta para distribuir la lógica
